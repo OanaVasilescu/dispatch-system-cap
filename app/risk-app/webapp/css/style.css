@@ -1,0 +1,20 @@
+/* Enter your custom styles here */
+
+/* .sapUiFormCLCellsL4:has(.sapUiHiddenPlaceholder){
+     display: none; 
+}
+
+.sapUiFormCLCellsL2:has(.sapUiHiddenPlaceholder){
+    display: none;
+} */
+
+.sapUiFormCLSmallColumns .sapUiFormCLElement>.sapUiFormCLCellsS4 {
+    width: auto !important;
+}
+.sapUiFormCLSmallColumns .sapUiFormCLElement>.sapUiFormCLCellsS6 {
+    width: auto !important;
+}
+
+.sapUiVlt.sapUiContentPadding>.sapuiVltCell:not(:last-child) {
+     padding-bottom: 0rem !important;
+}
