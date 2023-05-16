@@ -104,7 +104,7 @@
       "routes": [
         {
           "name": "RouteOverview",
-          "pattern": "",
+          "pattern": "doctor",
           "target": [
             "TargetOverview"
           ]
@@ -115,6 +115,16 @@
           "target": [
             "Details"
           ]
+        },
+        {
+          "name": "Login",
+          "pattern": "",
+          "target": "Login"
+        },
+        {
+          "name": "Register",
+          "pattern": "Register",
+          "target": "Register"
         }
       ],
       "targets": {
@@ -131,6 +141,20 @@
           "clearControlAggregation": false,
           "viewId": "Details",
           "viewName": "Details"
+        },
+        "Login": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Login",
+          "viewName": "Login"
+        },
+        "Register": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Register",
+          "viewName": "Register"
         }
       }
     },

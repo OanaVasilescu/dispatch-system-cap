@@ -1,0 +1,37 @@
+<mvc:View controllerName="riskapp.controller.Login"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Page id="idLoginPage" backgroundDesign="Transparent" showHeader="false">
+        <HBox width="100%" height="100%" justifyContent="End">
+            <VBox width="37%" height="100%" justifyContent="Center" alignItems="Start">
+                <HBox width="23rem" height="17rem" class="PanelBackground LoginStyle" justifyContent="Center">
+                    <f:SimpleForm id="loginSimpleForm" layout="ResponsiveGridLayout" editable="true" singleContainerFullSize="false">
+                        <f:content>
+                            <Toolbar ariaLabelledBy="Title2">
+                                <Title id="Title2" text="{i18n>LOGIN_TEXT}" />
+                            </Toolbar>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>EMAIL_ADDRESS}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputEmailAddress" value="{newUser>/email}" valueState="{newUser>/emailState}" change="checkEmail" />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>PASSWORD}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputPassword" value="{newUser>/password}" type="Password" valueState="{newUser>/passwordState}" change="checkPassword" />
+                            </HBox>
+                            <HBox justifyContent="Center">
+                                <Button text="{i18n>LOGIN_BUTTON}" type="Emphasized" press=".onLogin" class="sapUiSmallMarginTop" />
+                            </HBox>
+                            <HBox justifyContent="Center">
+                                <Text text="{i18n>NO_ACCOUNT_YET}" />
+                                <Button text="{i18n>REGISTER_HERE_BUTTON}" type="Transparent" press=".onRegisterHerePress" class="sapUiTinyMarginBegin" />
+                            </HBox>
+                        </f:content>
+                    </f:SimpleForm>
+                </HBox>
+            </VBox>
+        </HBox>
+    </Page>
+
+</mvc:View>

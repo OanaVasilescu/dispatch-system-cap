@@ -1,0 +1,73 @@
+<mvc:View controllerName="riskapp.controller.Register" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Page id="idRegisterPage" backgroundDesign="Transparent" showHeader="false" class="sapUiResponsiveMargin">
+        <HBox width="100%" height="100%" justifyContent="End">
+            <VBox width="37%" height="100%" justifyContent="Center" alignItems="Start">
+                <HBox width="23rem" height="41rem" class="PanelBackground LoginStyle">
+                    <f:SimpleForm id="loginSimpleForm" layout="ResponsiveGridLayout" editable="true">
+                        <f:toolbar>
+                            <Toolbar id="TB1">
+                                <Title id="Title1" text="{i18n>REGISTER_TEXT}" />
+                            </Toolbar>
+                        </f:toolbar>
+                        <f:content>
+                            <Toolbar ariaLabelledBy="Title2">
+                                <Title id="Title2" text="{i18n>PERSONAL_INFO}" />
+                            </Toolbar>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>FIRST_NAME}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputFirstName" value="{newUser>/firstName}" valueState="{newUser>/firstNameState}" change="checkFirstName" valueStateText="{i18n>VALUESTATE_TEXT_FIRSTNAME}" />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>LAST_NAME}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputLastName" value="{newUser>/lastName}" valueState="{newUser>/lastNameState}" change="checkLastName" valueStateText="{i18n>VALUESTATE_TEXT_LASTNAME}" />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>CITY}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputCity" value="{newUser>/city}" valueState="{newUser>/cityState}" change="checkCity" valueStateText="{i18n>VALUESTATE_TEXT_CITY}" />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>COUNTY}" class="sapUiSmallMarginTop" />
+                                <Select width="11.2rem" selectedKey="{newUser>/county}" items="{
+						          path: 'SelectedModel>/CountyCollection'		
+					          }">
+                                    <core:Item key="{SelectedModel>StatusId}" text="{SelectedModel>Status}" />
+                                </Select>
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>PHONE_NUMBER}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputPhoneNumber" value="{newUser>/phoneNumber}" valueState="{newUser>/phoneNumberState}" change="checkPhoneNumber" valueStateText="{i18n>VALUESTATE_TEXT_PHONE_NUMBER}"/>
+                            </HBox>
+                            <Toolbar id="TB2">
+                                <Title id="Title" text="{i18n>LOGIN_CREDENTIALS}" />
+                            </Toolbar>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>EMAIL_ADDRESS}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputEmailAddress" value="{newUser>/email}" valueState="{newUser>/emailState}" change="checkEmail" valueStateText="{i18n>VALUESTATE_TEXT_EMAIL_ADDRESS}"/>
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>PASSWORD}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputPassword" value="{newUser>/password}" type="Password" valueState="{newUser>/passwordState}" change="checkPassword" valueStateText="{i18n>VALUESTATE_TEXT_PASSWORD}" />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label text="{i18n>CONFIRM_PASSWORD}" class="sapUiSmallMarginTop" required="true" />
+                                <Input id="inputConfirmPassword" value="{newUser>/confirm_password}" type="Password" valueState="{newUser>/confirmPasswordState}" change="checkConfirmPassword" />
+                            </HBox>
+                            <HBox justifyContent="Center">
+                                <Button text="{i18n>REGISTER_BUTTON}" type="Emphasized" press=".onRegister" class="sapUiSmallMarginTop" />
+                            </HBox>
+                            <HBox justifyContent="Center">
+                                <Text text="{i18n>ALREADY_SIGNED}" />
+                                <Button text="{i18n>LOGIN_HERE_BUTTON}" type="Transparent" press=".onLoginHerePress" class="sapUiTinyMarginBegin" />
+                            </HBox>
+                        </f:content>
+                    </f:SimpleForm>
+                </HBox>
+            </VBox>
+        </HBox>
+    </Page>
+</mvc:View>

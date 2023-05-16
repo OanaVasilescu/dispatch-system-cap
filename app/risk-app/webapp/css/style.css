@@ -18,3 +18,123 @@
 .sapUiVlt.sapUiContentPadding>.sapuiVltCell:not(:last-child) {
      padding-bottom: 0rem !important;
 }
+
+.PanelBackground {
+    background-color: #cce1f8;
+  }
+
+.LoginStyle {
+    border-radius: 1.563rem;
+}
+
+.Image {
+  background-size: contain;
+}
+
+.bigLabel {
+    font-size: 2.25rem !important;
+  }
+
+.footerStyle{
+    background-color: #4590DA;
+}
+.filterStyle{
+    background-color: #4590DA;
+}
+.footerText{
+    color: white;
+    font-size: 1.375rem !important;
+}
+
+.quickSearchText{
+    font-size: 1.125rem !important;
+    font-weight: bold;
+}
+
+.textFont {
+    color: #0A6ED1;
+}
+
+.page2BgImg {
+    background-image: url('https://images2.imgbox.com/3a/30/0WD5sYKv_o.png');
+    background-size: 100% 100%;     
+}
+
+.blueCard {
+    background-color: #0A6ED1;
+}
+
+.whiteCard {
+    background-color: white;
+}
+
+.detailsTitle {
+    font-size: 1.875rem !important;
+    font-weight: bold;
+    color: #0A6ED1;
+}
+
+.detailsSubtitle {
+    font-size: 1.25rem !important;
+    font-weight: normal;
+    color: #0A6ED1;
+}
+
+.whiteFont {
+    color:white;
+}
+
+  .detailsTitle2 {
+    font-size: 30px !important;
+    font-weight: bold;
+    color: #000204;
+}
+
+.addDescription {
+  height: 240px !important;
+  }
+
+  .detailsTitle3 {
+    font-size: 2rem !important;
+    font-weight: bold;
+    color: #000204;
+}
+
+.sellACar {
+    background-image: url('https://images2.imgbox.com/50/e1/oJthxTU2_o.png');
+    background-size: 100% auto;  
+    background-attachment:scroll;   
+}
+
+
+.blueFont {
+    color: #0A6ED1;
+    font-weight: bold;
+}
+
+.carouselBackground{
+    background-color: white;
+}
+
+
+.summaryTitle {
+    color:black;
+    font-size: 1.563rem !important;
+    font-weight: bold;
+}
+
+.summarySubtitle {
+    color:black;
+    font-size: 1.25rem !important;
+    font-weight: bold;
+}
+
+.myProfileName {
+    color: #0A6ED1;
+    font-weight: bold;
+    font-size: 1.125rem !important;
+}
+
+.panelsRadius {
+    border-radius: 1rem;
+}
