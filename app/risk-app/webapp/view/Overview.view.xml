@@ -23,6 +23,10 @@
                         </IconTabFilter>
                         <IconTabFilter text="Pacients" key="pacients">
                         </IconTabFilter>
+                        <IconTabFilter text="Refferals" key="refferals">
+                        </IconTabFilter>
+                        <IconTabFilter text="Alarm Scenarios" key="alarmScenarios">
+                        </IconTabFilter>
                     </items>
                 </IconTabHeader>
                 <!-- <Button text="{i18n>filters}" icon="sap-icon://add-filter"></Button>
@@ -34,6 +38,8 @@
                 <pages>
                     <mvc:XMLView id="appointments" viewName="riskapp.view.Appointments"></mvc:XMLView>
                     <mvc:XMLView id="pacients" viewName="riskapp.view.Pacients"></mvc:XMLView>
+                    <mvc:XMLView id="refferals" viewName="riskapp.view.Refferals"></mvc:XMLView>
+                    <mvc:XMLView id="alarmScenarios" viewName="riskapp.view.AlarmScenarios"></mvc:XMLView>
                 </pages>
             </NavContainer>
         </tnt:mainContents>
