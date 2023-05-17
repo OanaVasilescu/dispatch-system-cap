@@ -20,6 +20,9 @@ sap.ui.define([], function () {
         },
         getLogin: function () {
             return origin + '/login';
+        },
+        getRegister: function () {
+            return origin + '/register';
         }
     }
 })

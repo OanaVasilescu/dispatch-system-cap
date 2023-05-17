@@ -127,10 +127,12 @@ sap.ui.define([
 
             let oRouter = this.getOwnerComponent().getRouter();
 
-            if (Validations.validateName(firstName) && Validations.validateName(lastName) && Validations.validatePhone(phoneNumber) && Validations.validateEmail(email) && Validations.validatePassword(password) && city && confirm_password) {
+            if (Validations.validateName(firstName) && Validations.validateName(lastName) && Validations.validateEmail(email) && Validations.validatePassword(password) && confirm_password) {
                 const data = JSON.parse(JSON.stringify(oData));
-                data.password = this.encryptPassword(data.password);
-                this.post("http://localhost:3000/register", data)
+                // data.password = this.encryptPassword(data.password);
+
+                // this.post(URLs.getRegister() + `(firstName='${firstName}',lastName='${lastName}',email='${email},'password='${password}',confirm='${confirm_password}',city='${city}',phoneNumber='${phoneNumber}')`)
+                this.get(URLs.getRegister() + `(json='${JSON.stringify(oData)}')`)
                     .then((response) => {
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
@@ -139,9 +141,7 @@ sap.ui.define([
                     })
                     .catch((err) => {
                         console.log(err);
-                        if (err.status === 401 || err.status === 400 || err.status === 409) {
-                            sap.m.MessageBox.error(`${err.responseJSON.error}` + ".");
-                        }
+                        sap.m.MessageBox.error(`${err.responseJSON.error.message}` + ".");
                     })
                 this.getView().getModel("newUser").setProperty("/firstNameState", "None");
                 this.getView().getModel("newUser").setProperty("/lastNameState", "None");

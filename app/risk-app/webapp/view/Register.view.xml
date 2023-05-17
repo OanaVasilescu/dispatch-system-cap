@@ -26,22 +26,22 @@
                                 <Label text="{i18n>LAST_NAME}" class="sapUiSmallMarginTop" required="true" />
                                 <Input id="inputLastName" value="{newUser>/lastName}" valueState="{newUser>/lastNameState}" change="checkLastName" valueStateText="{i18n>VALUESTATE_TEXT_LASTNAME}" />
                             </HBox>
-                            <HBox justifyContent="SpaceBetween">
+                            <!-- <HBox justifyContent="SpaceBetween">
                                 <Label text="{i18n>CITY}" class="sapUiSmallMarginTop" required="true" />
                                 <Input id="inputCity" value="{newUser>/city}" valueState="{newUser>/cityState}" change="checkCity" valueStateText="{i18n>VALUESTATE_TEXT_CITY}" />
-                            </HBox>
-                            <HBox justifyContent="SpaceBetween">
+                            </HBox> -->
+                            <!-- <HBox justifyContent="SpaceBetween">
                                 <Label text="{i18n>COUNTY}" class="sapUiSmallMarginTop" />
                                 <Select width="11.2rem" selectedKey="{newUser>/county}" items="{
 						          path: 'SelectedModel>/CountyCollection'		
 					          }">
                                     <core:Item key="{SelectedModel>StatusId}" text="{SelectedModel>Status}" />
                                 </Select>
-                            </HBox>
-                            <HBox justifyContent="SpaceBetween">
+                            </HBox> -->
+                            <!-- <HBox justifyContent="SpaceBetween">
                                 <Label text="{i18n>PHONE_NUMBER}" class="sapUiSmallMarginTop" required="true" />
                                 <Input id="inputPhoneNumber" value="{newUser>/phoneNumber}" valueState="{newUser>/phoneNumberState}" change="checkPhoneNumber" valueStateText="{i18n>VALUESTATE_TEXT_PHONE_NUMBER}"/>
-                            </HBox>
+                            </HBox> -->
                             <Toolbar id="TB2">
                                 <Title id="Title" text="{i18n>LOGIN_CREDENTIALS}" />
                             </Toolbar>

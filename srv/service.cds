@@ -16,8 +16,13 @@ service Service @(path : '/app') {
     entity AlarmScenarios as projection on my.AlarmScenarios;
     entity Alarm as projection on my.Alarm;
     entity MonitoredData as projection on my.MonitoredData;
+    entity User as projection on my.User;
 
     function getFiseOfUser(user : String) returns array of String;
     function login(email: String, password: String) returns array of String;
+    
+    function register(json: String) returns array of String;
 
 }
+
+

@@ -68,7 +68,7 @@ entity Supraveghetor: cuid{
 
 entity User: cuid{ 
     email: String;
-    parola: String; 
+    password: String; 
     jwt: String;
     userRole: UserRole;
     doctor: Composition of one Doctor;
@@ -76,6 +76,7 @@ entity User: cuid{
     ingrijitor: Composition of one Ingrijitor;
     supraveghetor: Composition of one Supraveghetor;
 }
+
 
 
 entity Fisa: cuid {
