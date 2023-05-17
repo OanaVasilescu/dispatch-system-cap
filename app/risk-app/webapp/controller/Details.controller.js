@@ -6,8 +6,26 @@ sap.ui.define([
     var ValueState = coreLibrary.ValueState;
     return BaseController.extend("riskapp.controller.Details", {
         onInit() {
-            this.getRouter().getRoute("Details").attachPatternMatched(this.initDetailPage, this);
+
+            const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
+            switch (user.userRole) {
+                case 'DOCTOR':
+                    this.getRouter().getRoute("Details").attachPatternMatched(this.initDetailPage, this);
+                    break;
+                case 'SUPRAV':
+                    // this.getRouter().navTo("SupervisorOverview");
+                    // this.getRouter().getRoute("SupervisorOverview").attachPatternMatched(this.initDetailPage, this);
+                    break;
+                case 'PACIENT':
+                    this.getRouter().getRoute("PacientOverview").attachPatternMatched(this.initDetailPageForPacient, this);
+                    break;
+                default:
+                    break;
+            }
+
+
             this.getView().setModel(new JSONModel(), "pacientModel");
+            this.getView().setModel(new JSONModel(), "roleModel");
             this.getView().setModel(new JSONModel({ tipFise: null, analize: [], diagnoze: [] }), "fisaModel");
             this.getView().setModel(new JSONModel({ editable: false }), "editModel");
 
@@ -170,6 +188,7 @@ sap.ui.define([
         initDetailPage: async function (oEvent) {
             let selectedPacientId = oEvent.getParameters("arguments").arguments.id;
             let edit = oEvent.getParameters("arguments").arguments.edit;
+            this.getView().getModel("roleModel").setProperty("/role", "DOCTOR");
 
             if (edit) {
                 this.getView().getModel("editModel").setProperty("/editable", true);
@@ -179,6 +198,19 @@ sap.ui.define([
             await this.getAlergeni();
         },
 
+
+        initDetailPageForPacient: async function (oEvent) {
+            const user = JSON.parse(localStorage.getItem("userModel")).value[0].user;
+            let edit = oEvent.getParameters("arguments").arguments.edit;
+            this.getView().getModel("roleModel").setProperty("/role", "PACIENT");
+
+
+            if (edit) {
+                this.getView().getModel("editModel").setProperty("/editable", true);
+            }
+            await this.getPacient(user.pacient_ID);
+            await this.getAlergeni();
+        },
 
         navigateBack: function () {
             this.getRouter().navTo("RouteOverview")

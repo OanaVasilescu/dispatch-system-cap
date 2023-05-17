@@ -130,6 +130,11 @@
           "name": "IngrijitorOverview",
           "pattern": "carer",
           "target": "IngrijitorOverview"
+        },
+        {
+          "name": "PacientOverview",
+          "pattern": "pacient/:edit:",
+          "target": "PacientOverview"
         }
       ],
       "targets": {
@@ -167,6 +172,13 @@
           "clearControlAggregation": false,
           "viewId": "IngrijitorOverview",
           "viewName": "IngrijitorOverview"
+        },
+        "PacientOverview": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "PacientOverview",
+          "viewName": "PacientOverview"
         }
       }
     },

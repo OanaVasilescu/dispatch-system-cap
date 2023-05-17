@@ -18,12 +18,14 @@ sap.ui.define([
         initCarerPage: function () {
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
             const token = JSON.parse(localStorage.getItem("userModel")).value[0].token
-            if (!user || user.userRole == "INGRIJ") //TODO; or if not carer
+            if (!user || user.userRole !== "INGRIJ") //TODO; or if not carer
             {
-                this.getRouter.navTo("Login");
+                this.getRouter().navTo("Login");
             }
 
             // TODO: verify if token is still valid, otherwise just redirect to login
+
+            // TODO: if token is expired => delete data from local storage I guess
         }
     });
 });

@@ -64,12 +64,31 @@ sap.ui.define([
                         this.getView().setModel(newUser, "newUser");
                         MessageToast.show(this.getI18nMessage("LOGIN_SUCCESSFUL"));
 
-                        // TODO: verify role and redirect to role overview
                         // TODO: allow acces only for that specific role
                         // TODO: save user/jwt globally so that each view has access to it
 
                         localStorage.setItem("userModel", JSON.stringify(response));
-                        this.getRouter().navTo("IngrijitorOverview");
+
+                        switch (response.value[0].user.userRole) {
+                            case 'DOCTOR':
+                                this.getRouter().navTo("IngrijitorOverview");
+                                break;
+                            case 'SUPRAV':
+                                // this.getRouter().navTo("SupervisorOverview");
+                                break;
+                            case 'PACIENT':
+                                this.getRouter().navTo("PacientOverview");
+                                break;
+                            case 'INGRIJ':
+                                this.getRouter().navTo("IngrijitorOverview");
+                                break;
+                            case 'ADMIN':
+                                // this.getRouter().navTo("AdminOverview");
+                                break;
+                            default:
+                                break;
+                        }
+
 
                         this.getView().getModel("newUser").setProperty("/emailState", "None");
                         this.getView()

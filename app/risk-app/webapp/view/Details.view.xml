@@ -7,7 +7,7 @@
         <customHeader>
             <Bar>
                 <contentLeft>
-                    <Button text="Back" press="navigateBack" />
+                    <Button text="Back" press="navigateBack" visible="{= ${roleModel>/role} === 'DOCTOR'}" />
                 </contentLeft>
                 <contentRight>
                     <Button id="edit" text="Edit" enabled="false" press="handleEditPress" visible="{= !${editModel>/editable}}" />
@@ -138,7 +138,7 @@
                     <Toolbar>
                         <Title text="Pacient History" />
                         <ToolbarSpacer/>
-                        <Button id="addFisa" text="Add Patient Record" icon="sap-icon://add" press="addFisa" />
+                        <Button visible="{= ${roleModel>/role} === 'DOCTOR'}" id="addFisa" text="Add Patient Record" icon="sap-icon://add" press="addFisa" />
                     </Toolbar>
                 </headerToolbar>
                 <CustomListItem press="pressHistory" type="Active">
