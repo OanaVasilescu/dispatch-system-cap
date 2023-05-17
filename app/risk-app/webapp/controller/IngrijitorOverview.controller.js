@@ -8,6 +8,7 @@ sap.ui.define([
     return BaseController.extend("riskapp.controller.IngrijitorOverview", {
         onInit() {
             this.getRouter().getRoute("IngrijitorOverview").attachPatternMatched(this.initCarerPage, this);
+            this.getView().setModel(new JSONModel(), "roleModel");
         },
         onItemSelect: function (oEvent) {
             let oItem = oEvent.getParameter("item");
@@ -22,8 +23,13 @@ sap.ui.define([
                 this.getRouter().navTo("Login");
             }
 
-            // TODO: verify if token is still valid, otherwise just redirect to login
+            if (!user.pacient) {
+                this.getView().getModel("roleModel").setProperty("/hasPacient", false)
+                return;
+            }
 
+            this.getView().getModel("roleModel").setProperty("/hasPacient", true)
+            // TODO: verify if token is still valid, otherwise just redirect to login
             // TODO: if token is expired => delete data from local storage I guess
         }
     });

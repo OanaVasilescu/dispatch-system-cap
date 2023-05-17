@@ -12,9 +12,8 @@ sap.ui.define([
                 case 'Doctor':
                     this.getRouter().getRoute("Details").attachPatternMatched(this.initDetailPage, this);
                     break;
-                case 'Supervisor':
-                    // this.getRouter().navTo("SupervisorOverview");
-                    // this.getRouter().getRoute("SupervisorOverview").attachPatternMatched(this.initDetailPage, this);
+                case 'Carer':
+                    this.getRouter().getRoute("IngrijitorOverview").attachPatternMatched(this.initDetailPageForCarer, this);
                     break;
                 case 'Pacient':
                     this.getRouter().getRoute("PacientOverview").attachPatternMatched(this.initDetailPageForPacient, this);
@@ -210,6 +209,13 @@ sap.ui.define([
             }
             await this.getPacient(user.pacient_ID);
             await this.getAlergeni();
+        },
+
+        initDetailPageForCarer: async function (oEvent) {
+            const user = JSON.parse(localStorage.getItem("userModel")).value[0].user;
+            this.getView().getModel("roleModel").setProperty("/role", "Carer");
+
+            await this.getCarer(user.ingrijitor_ID);
         },
 
         navigateBack: function () {
@@ -434,86 +440,6 @@ sap.ui.define([
                 return false;
             }
             return (cnp[12] === hashResult);
-        },
-
-        completePacient: function (pacient) {
-            if (pacient.cnp) {
-                const firstChar = pacient.cnp[0];
-                switch (firstChar) {
-                    case "1": pacient.sex = "M";
-                        break;
-                    case "2": pacient.sex = "F";
-                        break;
-                    case "5": pacient.sex = "M";
-                        break;
-                    case "6": pacient.sex = "F";
-                        break;
-                    case "7": pacient.sex = "M";
-                        break;
-                    case "8": pacient.sex = "F";
-                        break;
-                    default:
-                        break;
-                }
-                let an = pacient.cnp.substring(1, 3);
-                if (firstChar == 1 || firstChar == 2) {
-                    an = 19 + an;
-                }
-                if (firstChar == 5 || firstChar == 6) {
-                    an = 20 + an;
-                }
-
-                if (firstChar == 7 || firstChar == 8) {
-                    an = 20 + an;
-                }
-                if (firstChar == 3 || firstChar == 4) {
-                    an = 18 + an;
-                }
-
-                let luna = pacient.cnp.substring(3, 5);
-
-                switch (luna) {
-                    case '01': luna = 'Jan';
-                        break;
-                    case '02': luna = 'Feb';
-                        break;
-                    case '03': luna = 'Mar';
-                        break;
-                    case '04': luna = 'Apr';
-                        break;
-                    case '05': luna = 'May';
-                        break;
-                    case '06': luna = 'Jun';
-                        break;
-                    case '07': luna = 'Jul';
-                        break;
-                    case '08': luna = 'Aug';
-                        break;
-                    case '09': luna = 'Sep';
-                        break;
-                    case '10': luna = 'Oct';
-                        break;
-                    case '11': luna = 'Nov';
-                        break;
-                    case '12': luna = 'Dec';
-                        break;
-                    default:
-                        break;
-                }
-
-                let zi = pacient.cnp.substring(5, 7);
-
-                let total = zi + " " + luna + " " + an;
-
-                pacient.dataNasterii = total;
-
-                let varsta = new Date().getFullYear() - an;
-
-                pacient.varsta = varsta;
-                return pacient;
-            } else {
-                return pacient;
-            }
         },
 
         checkSelectFamily: function () {
@@ -875,6 +801,25 @@ sap.ui.define([
                 console.log(err);
                 this.messageHandler("Get pacient error");
             });
-        }
+        },
+
+        getCarer: async function (id) {
+            await this.get(URLs.getCarerUrl() + "/" + id + "?&$expand=pacient").then(async (data) => {
+
+                let completedData;
+                if (data.pacient) {
+                    completedData = this.completePacient(data);
+                    await this.getView().getModel("pacientModel").setData(completedData);
+                    this.getView().getModel("roleModel").setProperty("/hasPacient", false)
+                } else {
+                    this.getView().getModel("roleModel").setProperty("/hasPacient", false)
+                }
+
+            }).catch((err) => {
+                console.log(err);
+                this.messageHandler("Get carer data error");
+            });
+        },
+
     });
 });

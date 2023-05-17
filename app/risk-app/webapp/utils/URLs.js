@@ -15,6 +15,9 @@ sap.ui.define([], function () {
         getPacientUrl: function () {
             return origin + '/Pacient';
         },
+        getCarerUrl: function () {
+            return origin + '/Ingrijitor';
+        },
         getAlergeni: function () {
             return origin + '/Alergie';
         },

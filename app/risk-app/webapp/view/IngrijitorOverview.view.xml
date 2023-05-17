@@ -17,7 +17,7 @@
         </tnt:header>
         <tnt:subHeader>
             <tnt:ToolHeader>
-                <IconTabHeader selectedKey="pacient" select=".onItemSelect" mode="Inline">
+                <IconTabHeader selectedKey="pacient" select=".onItemSelect" mode="Inline" visible="{= ${roleModel>/hasPacient} }">
                     <items>
                         <IconTabFilter text="Pacient" key="pacient">
                         </IconTabFilter>

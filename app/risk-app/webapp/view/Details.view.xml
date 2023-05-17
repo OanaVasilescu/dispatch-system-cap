@@ -1,9 +1,11 @@
 <mvc:View controllerName="riskapp.controller.Details"
-    xmlns:f="sap.ui.layout.form"
+    xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:card="sap.f.cards"
+    xmlns:f="sap.f"
     xmlns="sap.m">
-    <Page id="page" enableScrolling="true" showNavButton="true" navButtonPress="navigateBack">
+    <Page id="page" enableScrolling="true" showNavButton="true" navButtonPress="navigateBack" visible="{= ${roleModel>/role} !== 'Carer' || (${roleModel>/role} === 'Carer' &amp;&amp; ${roleModel>/hasPacient} )}">
         <customHeader>
             <Bar>
                 <contentLeft>
@@ -22,10 +24,10 @@
                     <ObjectAttribute title="CNP" text="{pacientModel>/cnp}" />
                 </attributes>
             </ObjectHeader>
-            <f:SimpleForm class="sapUiForceWidthAuto sapUiResponsiveMargin" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
-                <f:title>
+            <form:SimpleForm class="sapUiForceWidthAuto sapUiResponsiveMargin" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
+                <form:title>
                     <core:Title text="Personal Data" />
-                </f:title>
+                </form:title>
                 <Label text="Name"/>
                 <Text visible="{= !${editModel>/editable}}" text="{pacientModel>/nume} {pacientModel>/prenume}"/>
                 <Input width="230px" visible="{editModel>/editable}" value="{pacientModel>/nume}"/>
@@ -102,7 +104,7 @@
                 <Label text="Email"/>
                 <Text visible="{= !${editModel>/editable}}" text="{pacientModel>/email}"/>
                 <Input id="email" width="230px" visible="{editModel>/editable}" value="{pacientModel>/email}" liveChange="changeEmail"/>
-            </f:SimpleForm>
+            </form:SimpleForm>
             <List headerText="Alergies List" backgroundDesign="Translucent" width="auto" class="sapUiResponsiveMargin" items="{
 			path: 'pacientModel>/alergii'
 		}">
@@ -150,8 +152,7 @@
                     </HBox>
                 </CustomListItem>
             </List>
-            <!-- <Table headerText="Treatment history" width="auto" class="sapUiResponsiveMargin"/> -->
-            <!-- <Panel headerText="A Panel" width="auto" class="sapUiResponsiveMargin"/> -->
         </content>
     </Page>
+    <IllustratedMessage visible="{= ${roleModel>/role} === 'Carer' &amp;&amp; !${roleModel>/hasPacient} }" illustrationType="sapIllus-NoNotifications" description="Check in after the pacient has added you as a carer" title="No pacient" />
 </mvc:View>
