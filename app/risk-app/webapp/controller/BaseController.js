@@ -134,7 +134,7 @@ sap.ui.define([
             let oView = this.getView();
             if (!Array.isArray(aInputs)) {
                 let emptyArray = [];
-                emptyArray.push(aInputs); // TODO: if it's not array, make it an array
+                emptyArray.push(aInputs);
                 aInputs = emptyArray;
             }
             let bNoValidationError = true,

@@ -23,7 +23,7 @@
                         </IconTabFilter>
                         <IconTabFilter text="Medication Administration" key="medication">
                         </IconTabFilter>
-                        <IconTabFilter text="Vitals" key="vitals">
+                        <IconTabFilter text="Monitored Data" key="monitoredData">
                         </IconTabFilter>
                     </items>
                 </IconTabHeader>
@@ -37,6 +37,7 @@
                     <mvc:XMLView id="pacient" viewName="riskapp.view.Details"></mvc:XMLView>
                     <mvc:XMLView id="medication" viewName="riskapp.view.Medication"></mvc:XMLView>
                     <mvc:XMLView id="vitals" viewName="riskapp.view.Vitals"></mvc:XMLView>
+                    <mvc:XMLView id="monitoredData" viewName="riskapp.view.MonitoredData"></mvc:XMLView>
                 </pages>
             </NavContainer>
         </tnt:mainContents>
