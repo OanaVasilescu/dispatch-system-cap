@@ -70,20 +70,21 @@ sap.ui.define([
                         localStorage.setItem("userModel", JSON.stringify(response));
 
                         switch (response.value[0].user.userRole) {
-                            case 'DOCTOR':
+                            case 'Doctor':
                                 this.getRouter().navTo("IngrijitorOverview");
                                 break;
-                            case 'SUPRAV':
-                                // this.getRouter().navTo("SupervisorOverview");
+                            case 'Supervisor':
+                                debugger;
+                                this.getRouter().navTo("SupervisorOverview");
                                 break;
-                            case 'PACIENT':
+                            case 'Pacient':
                                 this.getRouter().navTo("PacientOverview");
                                 break;
-                            case 'INGRIJ':
+                            case 'Carer':
                                 this.getRouter().navTo("IngrijitorOverview");
                                 break;
-                            case 'ADMIN':
-                                // this.getRouter().navTo("AdminOverview");
+                            case 'Admin':
+                                this.getRouter().navTo("AdminOverview");
                                 break;
                             default:
                                 break;
@@ -97,7 +98,6 @@ sap.ui.define([
 
                     })
                     .catch((err) => {
-                        debugger;
                         MessageBox.error(this.getI18nMessage("EMAIL_PASSWORD_ERROR"),
                             {
                                 title: this.getI18nMessage("LOGIN_FAILED"),

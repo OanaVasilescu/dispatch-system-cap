@@ -1,0 +1,38 @@
+<mvc:View controllerName="riskapp.controller.AdminOverview"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader design="Solid">
+                <Title level="H1" text="Admin">
+                </Title>
+                <ToolbarSpacer>
+                    <layoutData>
+                        <OverflowToolbarLayoutData minWidth="20px" />
+                    </layoutData>
+                </ToolbarSpacer>
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:subHeader>
+            <tnt:ToolHeader>
+                <IconTabHeader selectedKey="users" select=".onItemSelect" mode="Inline">
+                    <items>
+                        <IconTabFilter text="Users" key="users">
+                        </IconTabFilter>
+                    </items>
+                </IconTabHeader>
+                <!-- <Button text="{i18n>filters}" icon="sap-icon://add-filter"></Button>
+                <Button text="{i18n>uploadRiskEvent}" type="Emphasized" icon="sap-icon://add-document" press="onOpenDialog"></Button> -->
+            </tnt:ToolHeader>
+        </tnt:subHeader>
+        <tnt:mainContents>
+            <NavContainer id="pageContainer" initialPage="users">
+                <pages>
+                    <mvc:XMLView id="users" viewName="riskapp.view.Users"></mvc:XMLView>
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

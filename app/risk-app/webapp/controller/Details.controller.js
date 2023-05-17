@@ -9,14 +9,14 @@ sap.ui.define([
 
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
             switch (user.userRole) {
-                case 'DOCTOR':
+                case 'Doctor':
                     this.getRouter().getRoute("Details").attachPatternMatched(this.initDetailPage, this);
                     break;
-                case 'SUPRAV':
+                case 'Supervisor':
                     // this.getRouter().navTo("SupervisorOverview");
                     // this.getRouter().getRoute("SupervisorOverview").attachPatternMatched(this.initDetailPage, this);
                     break;
-                case 'PACIENT':
+                case 'Pacient':
                     this.getRouter().getRoute("PacientOverview").attachPatternMatched(this.initDetailPageForPacient, this);
                     break;
                 default:
@@ -188,7 +188,7 @@ sap.ui.define([
         initDetailPage: async function (oEvent) {
             let selectedPacientId = oEvent.getParameters("arguments").arguments.id;
             let edit = oEvent.getParameters("arguments").arguments.edit;
-            this.getView().getModel("roleModel").setProperty("/role", "DOCTOR");
+            this.getView().getModel("roleModel").setProperty("/role", "Doctor");
 
             if (edit) {
                 this.getView().getModel("editModel").setProperty("/editable", true);
@@ -202,7 +202,7 @@ sap.ui.define([
         initDetailPageForPacient: async function (oEvent) {
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user;
             let edit = oEvent.getParameters("arguments").arguments.edit;
-            this.getView().getModel("roleModel").setProperty("/role", "PACIENT");
+            this.getView().getModel("roleModel").setProperty("/role", "Pacient");
 
 
             if (edit) {

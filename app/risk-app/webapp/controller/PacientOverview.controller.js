@@ -19,8 +19,7 @@ sap.ui.define([
         initPage: function () {
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
             const token = JSON.parse(localStorage.getItem("userModel")).value[0].token
-            if (!user || user.userRole !== "PACIENT") //TODO; or if not carer
-            {
+            if (!user || user.userRole !== "Pacient") {
                 this.getRouter().navTo("Login");
             }
 

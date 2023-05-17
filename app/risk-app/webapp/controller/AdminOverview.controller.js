@@ -5,20 +5,20 @@ sap.ui.define([
 ], function (BaseController, JSONModel, URLs) {
     "use strict";
 
-    return BaseController.extend("riskapp.controller.IngrijitorOverview", {
+    return BaseController.extend("riskapp.controller.AdminOverview", {
         onInit() {
-            this.getRouter().getRoute("IngrijitorOverview").attachPatternMatched(this.initCarerPage, this);
+            this.getRouter().getRoute("AdminOverview").attachPatternMatched(this.initPage, this);
         },
+
         onItemSelect: function (oEvent) {
             let oItem = oEvent.getParameter("item");
             this.byId("pageContainer").to(this.getView().createId(oItem.getKey()));
         },
 
-
-        initCarerPage: function () {
+        initPage: function () {
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
             const token = JSON.parse(localStorage.getItem("userModel")).value[0].token
-            if (!user || user.userRole !== "Carer") {
+            if (!user || user.userRole !== "Admin") {
                 this.getRouter().navTo("Login");
             }
 

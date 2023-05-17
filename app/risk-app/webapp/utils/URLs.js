@@ -23,6 +23,9 @@ sap.ui.define([], function () {
         },
         getRegister: function () {
             return origin + '/register';
+        },
+        getUsersUrl: function () {
+            return origin + '/User?&$expand=doctor,pacient,ingrijitor,supraveghetor';
         }
     }
 })

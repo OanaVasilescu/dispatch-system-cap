@@ -1,0 +1,48 @@
+<mvc:View controllerName="riskapp.controller.Users"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:t="sap.ui.table">
+
+    <t:Table id="table" selectionMode="None" rows="{/}" visibleRowCount="15" enableCellFilter="{ui>/cellFilterOn}" filter="filterPrice" ariaLabelledBy="title">
+        <t:extension>
+            <OverflowToolbar style="Clear">
+                <Title id="title" text="Users"/>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://clear-filter" tooltip="Clear all filters" press="clearAllFilters"/>
+                <ToolbarSeparator/>
+                <Button icon="sap-icon://add" tooltip="Add User" press="addUser" ariaHasPopup="Dialog"/>
+            </OverflowToolbar>
+        </t:extension>
+        <t:columns>
+            <t:Column filterProperty="nume" sortProperty="nume" defaultFilterOperator="StartsWith">
+                <Label text="Last Name" />
+                <t:template>
+                    <Text text="{nume}" wrapping="false" />
+                </t:template>
+            </t:Column>
+            <t:Column filterProperty="prenume" sortProperty="prenume">
+                <Label text="First Name" />
+                <t:template>
+                    <Text text="{prenume}" wrapping="false" />
+                </t:template>
+            </t:Column>
+            <t:Column filterProperty="email">
+                <Label text="Email" />
+                <t:template>
+                    <Text text="{email}" wrapping="false" />
+                </t:template>
+            </t:Column>
+            <t:Column filterProperty="userRole">
+                <Label text="Role" />
+                <t:template >
+                    <Text text="{userRole}" wrapping="false" />
+                </t:template>
+            </t:Column>
+        </t:columns>
+        <t:footer>
+            <OverflowToolbar id="infobar"></OverflowToolbar>
+        </t:footer>
+    </t:Table>
+</mvc:View>

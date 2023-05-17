@@ -135,6 +135,11 @@
           "name": "PacientOverview",
           "pattern": "pacient/:edit:",
           "target": "PacientOverview"
+        },
+        {
+          "name": "AdminOverview",
+          "pattern": "admin",
+          "target": "AdminOverview"
         }
       ],
       "targets": {
@@ -179,6 +184,13 @@
           "clearControlAggregation": false,
           "viewId": "PacientOverview",
           "viewName": "PacientOverview"
+        },
+        "AdminOverview": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "AdminOverview",
+          "viewName": "AdminOverview"
         }
       }
     },

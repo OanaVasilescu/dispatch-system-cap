@@ -69,8 +69,11 @@ entity Supraveghetor: cuid{
 entity User: cuid{ 
     email: String;
     password: String; 
+    passwordSetByAdmin: Boolean default true;
     jwt: String;
     userRole: UserRole;
+    nume: String; 
+    prenume: String;
     doctor: Composition of one Doctor;
     pacient: Composition of one Pacient;
     ingrijitor: Composition of one Ingrijitor;
@@ -152,7 +155,7 @@ entity MonitoredData: cuid {
 }
 
 type UserRole: String enum {
-  DOCTOR; SUPRAV; PACIENT; INGRIJ; ADMIN
+  Doctor; Supervisor; Pacient; Carer; Admin
 }
 
 type Severity: String enum {
