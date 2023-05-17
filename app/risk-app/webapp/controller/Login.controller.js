@@ -1,8 +1,10 @@
 sap.ui.define([
     "riskapp/controller/BaseController",
     "sap/ui/model/json/JSONModel",
-    "riskapp/utils/URLs"
-], function (BaseController, JSONModel, URLs) {
+    "riskapp/utils/URLs",
+    "riskapp/utils/Validations",
+    "sap/m/MessageBox",
+], function (BaseController, JSONModel, URLs, Validations, MessageBox) {
     "use strict";
 
     return BaseController.extend("riskapp.controller.Login", {
@@ -55,7 +57,7 @@ sap.ui.define([
                 const dataI = JSON.parse(JSON.stringify(data));
                 dataI.password = this.encryptPassword(data.password);
 
-                this.post("http://localhost:3000/login", dataI)
+                this.get(URLs.getLogin() + `(email='${email}',password='${dataI.password}')`)
                     .then((response) => {
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");

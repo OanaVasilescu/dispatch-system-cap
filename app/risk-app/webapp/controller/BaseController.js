@@ -4,8 +4,8 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "riskapp/utils/URLs",
     "sap/m/MessageToast",
-
-], function (Controller, AjaxClient, JSONModel, URLs, MessageToast) {
+    "jquery.sap.global",
+], function (Controller, AjaxClient, JSONModel, URLs, MessageToast, jQuery) {
     "use strict";
     return Controller.extend("riskapp.controller.BaseController", {
         getRouter: function () {
@@ -67,7 +67,7 @@ sap.ui.define([
             let sValueState = "None";
             let bValid = this._validateInput(sValue, sId);
             let errorOrWarning = "Error";
-            if (! bValid) {
+            if (!bValid) {
                 sValueState = errorOrWarning;
             }
             source.setValueState(sValueState);
@@ -89,13 +89,31 @@ sap.ui.define([
                     return this._validateNotEmpty(sValue.trim())
                 case "eventType":
                     return this._validateSelect(sId);
-                    // case "countriesAffected":
-                    //     return this._validateSelect(sId);
+                // case "countriesAffected":
+                //     return this._validateSelect(sId);
                 case "taskTypeSelect":
                     return this._validateSelect(sId);
                 default:
                     return false;
             }
+        },
+
+        encryptPassword: function (password) {
+            // const secret = Credentials.getEncryptionSecret();
+            // const encryptedPassword = CryptoJS.AES.encrypt(
+            //     password,
+            //     'ENCRYPTION_SECRET'
+            // ).toString();
+            // return encryptedPassword;
+
+            return password
+        },
+
+
+        getI18nMessage: function (sI18n, arg) {
+            var oBundle = this.getView().getModel("i18n").getResourceBundle();
+            var sMsg = oBundle.getText(sI18n, arg);
+            return sMsg;
         },
 
         _validateNotEmpty: function (sValue) {
@@ -130,9 +148,9 @@ sap.ui.define([
                 bNoValidationError = bIsValid && bNoValidationError;
                 let errorOrWarning = "Error";
 
-                if (! bIsValid) 
+                if (!bIsValid)
                     oView.byId(sId).setValueState(errorOrWarning);
-                 else {
+                else {
                     oView.byId(sId).setValueState("None");
                 }
             }

@@ -15,13 +15,17 @@ entity Programare: cuid{
 }
 
 
-entity Doctor: cuid, UserParola{
+entity Doctor: cuid{
+    nume: String; 
+    prenume: String;
     pacients: Association to many Pacient on pacients.doctor = $self;
     oras: String;
     speciality: String;
 }
 
-entity Pacient : cuid, UserParola {
+entity Pacient : cuid {
+    nume: String; 
+    prenume: String;
     doctor: Association to Doctor;
     ingrijitor: Association to many Ingrijitor on ingrijitor.pacient = $self;
     monitoredData: Association to many MonitoredData on monitoredData.pacient = $self;
@@ -50,25 +54,28 @@ entity Pacient : cuid, UserParola {
     fise: Association to many Fisa on fise.pacient = $self;
 }
 
-entity Ingrijitor: cuid, UserParola {
+entity Ingrijitor: cuid {
+    nume: String; 
+    prenume: String;
     pacient: Association to Pacient;
 }
 
-entity Supraveghetor: cuid, UserParola{
+entity Supraveghetor: cuid{
+    nume: String; 
+    prenume: String;
     oras: String;
 }
 
-entity Admin: cuid, UserParola{
-}
-
-aspect UserParola { 
-    nume: String; 
-    prenume: String;
-    user: String;
+entity User: cuid{ 
+    email: String;
     parola: String; 
+    jwt: String;
     userRole: UserRole;
+    doctor: Composition of one Doctor;
+    pacient: Composition of one Pacient;
+    ingrijitor: Composition of one Ingrijitor;
+    supraveghetor: Composition of one Supraveghetor;
 }
-
 
 
 entity Fisa: cuid {

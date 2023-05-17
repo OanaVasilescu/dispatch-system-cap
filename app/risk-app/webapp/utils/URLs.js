@@ -17,6 +17,9 @@ sap.ui.define([], function () {
         },
         getAlergeni: function () {
             return origin + '/Alergie';
+        },
+        getLogin: function () {
+            return origin + '/login';
         }
     }
 })
