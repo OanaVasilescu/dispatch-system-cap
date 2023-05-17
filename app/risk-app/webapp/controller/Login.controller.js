@@ -4,7 +4,8 @@ sap.ui.define([
     "riskapp/utils/URLs",
     "riskapp/utils/Validations",
     "sap/m/MessageBox",
-], function (BaseController, JSONModel, URLs, Validations, MessageBox) {
+    "sap/m/MessageToast",
+], function (BaseController, JSONModel, URLs, Validations, MessageBox, MessageToast) {
     "use strict";
 
     return BaseController.extend("riskapp.controller.Login", {
@@ -62,10 +63,13 @@ sap.ui.define([
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
                         MessageToast.show(this.getI18nMessage("LOGIN_SUCCESSFUL"));
-                        document.cookie = `token=${response.accessToken}`;
-                        document.cookie = `id=${response.user._id}`;
-                        let oRouter = this.getOwnerComponent().getRouter();
-                        oRouter.navTo("LandingPage");
+
+                        // TODO: verify role and redirect to role overview
+                        // TODO: allow acces only for that specific role
+                        // TODO: save user/jwt globally so that each view has access to it
+
+                        localStorage.setItem("userModel", JSON.stringify(response));
+                        this.getRouter().navTo("IngrijitorOverview");
 
                         this.getView().getModel("newUser").setProperty("/emailState", "None");
                         this.getView()
@@ -74,6 +78,7 @@ sap.ui.define([
 
                     })
                     .catch((err) => {
+                        debugger;
                         MessageBox.error(this.getI18nMessage("EMAIL_PASSWORD_ERROR"),
                             {
                                 title: this.getI18nMessage("LOGIN_FAILED"),

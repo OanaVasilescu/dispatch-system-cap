@@ -123,8 +123,13 @@
         },
         {
           "name": "Register",
-          "pattern": "Register",
+          "pattern": "register",
           "target": "Register"
+        },
+        {
+          "name": "IngrijitorOverview",
+          "pattern": "carer",
+          "target": "IngrijitorOverview"
         }
       ],
       "targets": {
@@ -155,6 +160,13 @@
           "clearControlAggregation": false,
           "viewId": "Register",
           "viewName": "Register"
+        },
+        "IngrijitorOverview": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "IngrijitorOverview",
+          "viewName": "IngrijitorOverview"
         }
       }
     },

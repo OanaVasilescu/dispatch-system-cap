@@ -42,7 +42,7 @@ async function login(req) {
     const user = allUser[0]
 
     if (user) {
-        if (bcrypt.compareSync(req.data.password, user.password)) {
+        if (bcrypt.compareSync(req.data.password.toString(), user.password.toString())) {
             // if (req.data.password == user.password) {
             const token = jwt.sign(user.email, 'process.env.ACCESS_TOKEN_SECRET', {});
 
