@@ -19,6 +19,7 @@ entity Doctor: cuid{
     nume: String;
     pacients: Association to many Pacient on pacients.doctor = $self;
     oras: String;
+    speciality: String;
     userRole: UserRole;
 }
 
@@ -100,6 +101,13 @@ entity Tratament: cuid {
     nrPastileDeodata: Integer;
 }
 
+entity MedicationAdministration: cuid {
+    tratament: Association to Tratament;
+    date: String;
+    persCareAdminitrat: Association to Ingrijitor;
+    pacient: Association to Pacient;
+}
+
 entity Alergie: cuid {
     tip: String;
     alergen: String;
@@ -109,13 +117,41 @@ entity AlarmScenarios: cuid{
     name: String;
     author: Association to Doctor;
     description: String;
+    severity: Severity;
+    gasMin: Integer;
+    gasMax: Integer;
+    lightMin: Integer;
+    lightMax: Integer;
+    proximityMin: Integer;
+    proximityMax: Integer;
+    pulseMin: Integer;
+    pulseMax: Integer;
+    humidityMin: Integer;
+    humidityMax: Integer;
+    temperatureMin: Integer;
+    temperatureMax: Integer;
+}
+
+entity Alarm: cuid{
+    monitoredData: Association to MonitoredData;
+    scenario: Association to AlarmScenarios;
+    pacient: Association to Pacient
 }
 
 entity MonitoredData: cuid {
+    gas: Integer;
+    light: Integer;
+    proximity: Integer;
     pulse: Integer;
+    humidity: Integer;
+    temperature: Integer;
     pacient: Association to Pacient;
 }
 
 type UserRole: String enum {
   DOCTOR; SUPRAV; PACIENT; INGRIJ; ADMIN
+}
+
+type Severity: String enum {
+  CRITICAL; WARNING; INFO; 
 }
