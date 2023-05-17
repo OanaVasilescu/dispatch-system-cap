@@ -27,7 +27,7 @@ entity Pacient : cuid {
     nume: String; 
     prenume: String;
     doctor: Association to Doctor;
-    ingrijitor: Association to many Ingrijitor on ingrijitor.pacient = $self;
+    ingrijitor: Association to one Ingrijitor;
     monitoredData: Association to many MonitoredData on monitoredData.pacient = $self;
     oras: String;
     cnp: String;
