@@ -6,7 +6,7 @@
     <tnt:ToolPage id="toolPage">
         <tnt:header>
             <tnt:ToolHeader design="Solid">
-                <Title level="H1" text="Carer">
+                <Title level="H1" text="Pacient">
                 </Title>
                 <ToolbarSpacer>
                     <layoutData>

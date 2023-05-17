@@ -10,6 +10,11 @@ sap.ui.define([
             this.getRouter().getRoute("PacientOverview").attachPatternMatched(this.initPage, this);
         },
 
+        onItemSelect: function (oEvent) {
+            let oItem = oEvent.getParameter("item");
+            this.byId("pageContainer").to(this.getView().createId(oItem.getKey()));
+        },
+
 
         initPage: function () {
             const user = JSON.parse(localStorage.getItem("userModel")).value[0].user
