@@ -808,7 +808,7 @@ sap.ui.define([
 
                 let completedData;
                 if (data.pacient) {
-                    completedData = this.completePacient(data);
+                    completedData = this.completePacient(data.pacient);
                     await this.getView().getModel("pacientModel").setData(completedData);
                     this.getView().getModel("roleModel").setProperty("/hasPacient", false)
                 } else {
