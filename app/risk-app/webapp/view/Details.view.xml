@@ -10,7 +10,7 @@
                     <Button text="Back" press="navigateBack" visible="{= ${roleModel>/role} === 'DOCTOR'}" />
                 </contentLeft>
                 <contentRight>
-                    <Button id="edit" text="Edit" enabled="false" press="handleEditPress" visible="{= !${editModel>/editable}}" />
+                    <Button id="edit" text="Edit" enabled="false" press="handleEditPress" visible="{= (!${editModel>/editable}) &amp;&amp; (${roleModel>/role} === 'DOCTOR' || ${roleModel>/role} === 'PACIENT') }" />
                     <Button id="save" text="Save" type="Emphasized" visible="{editModel>/editable}" press="handleSavePress" />
                     <Button id="cancel" text="Cancel" visible="{editModel>/editable}" press="handleCancelPress" />
                 </contentRight>
