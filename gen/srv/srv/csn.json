@@ -1,0 +1,2224 @@
+{
+  "namespace": "eespc.app",
+  "definitions": {
+    "eespc.app.Programare": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "text": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "type": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "eespc.app.Doctor": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "pacients": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "eespc.app.Pacient",
+          "on": [
+            {
+              "ref": [
+                "pacients",
+                "doctor"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "oras": {
+          "type": "cds.String"
+        },
+        "speciality": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "eespc.app.Pacient": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "doctor": {
+          "type": "cds.Association",
+          "target": "eespc.app.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "ingrijitor": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "eespc.app.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "monitoredData": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "eespc.app.MonitoredData",
+          "on": [
+            {
+              "ref": [
+                "monitoredData",
+                "pacient"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "oras": {
+          "type": "cds.String"
+        },
+        "cnp": {
+          "type": "cds.String"
+        },
+        "sex": {
+          "type": "cds.String"
+        },
+        "dataNasterii": {
+          "type": "cds.String"
+        },
+        "varsta": {
+          "type": "cds.Integer"
+        },
+        "domiciliu": {
+          "type": "cds.String"
+        },
+        "judet": {
+          "type": "cds.String"
+        },
+        "strada": {
+          "type": "cds.String"
+        },
+        "numar": {
+          "type": "cds.String"
+        },
+        "bloc": {
+          "type": "cds.String"
+        },
+        "scara": {
+          "type": "cds.String"
+        },
+        "etaj": {
+          "type": "cds.String"
+        },
+        "apartament": {
+          "type": "cds.String"
+        },
+        "email": {
+          "type": "cds.String"
+        },
+        "grupSangvin": {
+          "type": "cds.String"
+        },
+        "greutate": {
+          "type": "cds.Integer"
+        },
+        "inaltime": {
+          "type": "cds.Integer"
+        },
+        "alergii": {
+          "items": {
+            "elements": {
+              "alergen": {
+                "type": "cds.String"
+              },
+              "tip": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "ocupatie": {
+          "type": "cds.String"
+        },
+        "fise": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "eespc.app.Fisa",
+          "on": [
+            {
+              "ref": [
+                "fise",
+                "pacient"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.Ingrijitor": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.Supraveghetor": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "oras": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "eespc.app.User": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "email": {
+          "type": "cds.String"
+        },
+        "password": {
+          "type": "cds.String"
+        },
+        "passwordSetByAdmin": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "jwt": {
+          "type": "cds.String"
+        },
+        "userRole": {
+          "type": "eespc.app.UserRole"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "doctor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "eespc.app.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "ingrijitor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "eespc.app.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "supraveghetor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "eespc.app.Supraveghetor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.Fisa": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tipFise": {
+          "type": "cds.String"
+        },
+        "analize": {
+          "items": {
+            "elements": {
+              "tip": {
+                "type": "cds.String"
+              },
+              "text": {
+                "type": "cds.String"
+              },
+              "rezultate": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "drugs": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "selected": {
+                "type": "cds.Boolean"
+              }
+            }
+          }
+        },
+        "boli": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "selected": {
+                "type": "cds.Boolean"
+              }
+            }
+          }
+        },
+        "diagnoze": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "tratament": {
+                "items": {
+                  "elements": {
+                    "medicament": {
+                      "type": "cds.String"
+                    },
+                    "modAdministrare": {
+                      "type": "cds.String"
+                    },
+                    "selected": {
+                      "type": "cds.Boolean"
+                    }
+                  }
+                }
+              },
+              "mentiuni": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "data": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "eespc.app.Boala": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "tratament": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "eespc.app.Tratament",
+          "on": [
+            {
+              "ref": [
+                "tratament",
+                "boala"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.Tratament": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "medicament": {
+          "type": "cds.String"
+        },
+        "boala": {
+          "type": "cds.Association",
+          "target": "eespc.app.Boala",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "durataTratament": {
+          "type": "cds.String"
+        },
+        "pastilaDimineata": {
+          "type": "cds.Boolean"
+        },
+        "pastilaSeara": {
+          "type": "cds.Boolean"
+        },
+        "pastilaZiua": {
+          "type": "cds.Boolean"
+        },
+        "nrPastileDeodata": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "eespc.app.MedicationAdministration": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tratament": {
+          "type": "cds.Association",
+          "target": "eespc.app.Tratament",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "date": {
+          "type": "cds.String"
+        },
+        "persCareAdminitrat": {
+          "type": "cds.Association",
+          "target": "eespc.app.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.Alergie": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tip": {
+          "type": "cds.String"
+        },
+        "alergen": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "eespc.app.AlarmScenarios": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "author": {
+          "type": "cds.Association",
+          "target": "eespc.app.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "severity": {
+          "type": "eespc.app.Severity"
+        },
+        "gasMin": {
+          "type": "cds.Integer"
+        },
+        "gasMax": {
+          "type": "cds.Integer"
+        },
+        "lightMin": {
+          "type": "cds.Integer"
+        },
+        "lightMax": {
+          "type": "cds.Integer"
+        },
+        "proximityMin": {
+          "type": "cds.Integer"
+        },
+        "proximityMax": {
+          "type": "cds.Integer"
+        },
+        "pulseMin": {
+          "type": "cds.Integer"
+        },
+        "pulseMax": {
+          "type": "cds.Integer"
+        },
+        "humidityMin": {
+          "type": "cds.Integer"
+        },
+        "humidityMax": {
+          "type": "cds.Integer"
+        },
+        "temperatureMin": {
+          "type": "cds.Integer"
+        },
+        "temperatureMax": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "eespc.app.Alarm": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "monitoredData": {
+          "type": "cds.Association",
+          "target": "eespc.app.MonitoredData",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "scenario": {
+          "type": "cds.Association",
+          "target": "eespc.app.AlarmScenarios",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.MonitoredData": {
+      "kind": "entity",
+      "includes": [
+        "cuid"
+      ],
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "gas": {
+          "type": "cds.Integer"
+        },
+        "light": {
+          "type": "cds.Integer"
+        },
+        "proximity": {
+          "type": "cds.Integer"
+        },
+        "pulse": {
+          "type": "cds.Integer"
+        },
+        "humidity": {
+          "type": "cds.Integer"
+        },
+        "temperature": {
+          "type": "cds.Integer"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "eespc.app.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "eespc.app.UserRole": {
+      "kind": "type",
+      "type": "cds.String",
+      "enum": {
+        "Doctor": {},
+        "Supervisor": {},
+        "Pacient": {},
+        "Carer": {},
+        "Admin": {}
+      }
+    },
+    "eespc.app.Severity": {
+      "kind": "type",
+      "type": "cds.String",
+      "enum": {
+        "CRITICAL": {},
+        "WARNING": {},
+        "INFO": {}
+      }
+    },
+    "Service": {
+      "@source": "srv/service.cds",
+      "kind": "service",
+      "@path": "/app"
+    },
+    "Service.Programare": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Programare"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "text": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "type": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.Pacient": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Pacient"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "doctor": {
+          "type": "cds.Association",
+          "target": "Service.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "ingrijitor": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "Service.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "monitoredData": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Service.MonitoredData",
+          "on": [
+            {
+              "ref": [
+                "monitoredData",
+                "pacient"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "oras": {
+          "type": "cds.String"
+        },
+        "cnp": {
+          "type": "cds.String"
+        },
+        "sex": {
+          "type": "cds.String"
+        },
+        "dataNasterii": {
+          "type": "cds.String"
+        },
+        "varsta": {
+          "type": "cds.Integer"
+        },
+        "domiciliu": {
+          "type": "cds.String"
+        },
+        "judet": {
+          "type": "cds.String"
+        },
+        "strada": {
+          "type": "cds.String"
+        },
+        "numar": {
+          "type": "cds.String"
+        },
+        "bloc": {
+          "type": "cds.String"
+        },
+        "scara": {
+          "type": "cds.String"
+        },
+        "etaj": {
+          "type": "cds.String"
+        },
+        "apartament": {
+          "type": "cds.String"
+        },
+        "email": {
+          "type": "cds.String"
+        },
+        "grupSangvin": {
+          "type": "cds.String"
+        },
+        "greutate": {
+          "type": "cds.Integer"
+        },
+        "inaltime": {
+          "type": "cds.Integer"
+        },
+        "alergii": {
+          "items": {
+            "elements": {
+              "alergen": {
+                "type": "cds.String"
+              },
+              "tip": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "ocupatie": {
+          "type": "cds.String"
+        },
+        "fise": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Service.Fisa",
+          "on": [
+            {
+              "ref": [
+                "fise",
+                "pacient"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.Fisa": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Fisa"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tipFise": {
+          "type": "cds.String"
+        },
+        "analize": {
+          "items": {
+            "elements": {
+              "tip": {
+                "type": "cds.String"
+              },
+              "text": {
+                "type": "cds.String"
+              },
+              "rezultate": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "drugs": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "selected": {
+                "type": "cds.Boolean"
+              }
+            }
+          }
+        },
+        "boli": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "selected": {
+                "type": "cds.Boolean"
+              }
+            }
+          }
+        },
+        "diagnoze": {
+          "items": {
+            "elements": {
+              "text": {
+                "type": "cds.String"
+              },
+              "tratament": {
+                "items": {
+                  "elements": {
+                    "medicament": {
+                      "type": "cds.String"
+                    },
+                    "modAdministrare": {
+                      "type": "cds.String"
+                    },
+                    "selected": {
+                      "type": "cds.Boolean"
+                    }
+                  }
+                }
+              },
+              "mentiuni": {
+                "type": "cds.String"
+              }
+            }
+          }
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "data": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "Service.Boala": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Boala"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "tratament": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Service.Tratament",
+          "on": [
+            {
+              "ref": [
+                "tratament",
+                "boala"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.Tratament": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Tratament"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "medicament": {
+          "type": "cds.String"
+        },
+        "boala": {
+          "type": "cds.Association",
+          "target": "Service.Boala",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "durataTratament": {
+          "type": "cds.String"
+        },
+        "pastilaDimineata": {
+          "type": "cds.Boolean"
+        },
+        "pastilaSeara": {
+          "type": "cds.Boolean"
+        },
+        "pastilaZiua": {
+          "type": "cds.Boolean"
+        },
+        "nrPastileDeodata": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "Service.Alergie": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Alergie"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tip": {
+          "type": "cds.String"
+        },
+        "alergen": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.Doctor": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Doctor"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "pacients": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "Service.Pacient",
+          "on": [
+            {
+              "ref": [
+                "pacients",
+                "doctor"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "oras": {
+          "type": "cds.String"
+        },
+        "speciality": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.Ingrijitor": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Ingrijitor"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.Supraveghetor": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Supraveghetor"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "oras": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.MedicationAdministration": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.MedicationAdministration"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "tratament": {
+          "type": "cds.Association",
+          "target": "Service.Tratament",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "date": {
+          "type": "cds.String"
+        },
+        "persCareAdminitrat": {
+          "type": "cds.Association",
+          "target": "Service.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.AlarmScenarios": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.AlarmScenarios"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "author": {
+          "type": "cds.Association",
+          "target": "Service.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "severity": {
+          "type": "eespc.app.Severity"
+        },
+        "gasMin": {
+          "type": "cds.Integer"
+        },
+        "gasMax": {
+          "type": "cds.Integer"
+        },
+        "lightMin": {
+          "type": "cds.Integer"
+        },
+        "lightMax": {
+          "type": "cds.Integer"
+        },
+        "proximityMin": {
+          "type": "cds.Integer"
+        },
+        "proximityMax": {
+          "type": "cds.Integer"
+        },
+        "pulseMin": {
+          "type": "cds.Integer"
+        },
+        "pulseMax": {
+          "type": "cds.Integer"
+        },
+        "humidityMin": {
+          "type": "cds.Integer"
+        },
+        "humidityMax": {
+          "type": "cds.Integer"
+        },
+        "temperatureMin": {
+          "type": "cds.Integer"
+        },
+        "temperatureMax": {
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "Service.Alarm": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.Alarm"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "monitoredData": {
+          "type": "cds.Association",
+          "target": "Service.MonitoredData",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "scenario": {
+          "type": "cds.Association",
+          "target": "Service.AlarmScenarios",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.MonitoredData": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.MonitoredData"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "gas": {
+          "type": "cds.Integer"
+        },
+        "light": {
+          "type": "cds.Integer"
+        },
+        "proximity": {
+          "type": "cds.Integer"
+        },
+        "pulse": {
+          "type": "cds.Integer"
+        },
+        "humidity": {
+          "type": "cds.Integer"
+        },
+        "temperature": {
+          "type": "cds.Integer"
+        },
+        "pacient": {
+          "type": "cds.Association",
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.User": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "eespc.app.User"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "email": {
+          "type": "cds.String"
+        },
+        "password": {
+          "type": "cds.String"
+        },
+        "passwordSetByAdmin": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": true
+          }
+        },
+        "jwt": {
+          "type": "cds.String"
+        },
+        "userRole": {
+          "type": "eespc.app.UserRole"
+        },
+        "nume": {
+          "type": "cds.String"
+        },
+        "prenume": {
+          "type": "cds.String"
+        },
+        "doctor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "Service.Doctor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "pacient": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "Service.Pacient",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "ingrijitor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "Service.Ingrijitor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "supraveghetor": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "target": "Service.Supraveghetor",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Service.getFiseOfUser": {
+      "kind": "function",
+      "params": {
+        "user": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.login": {
+      "kind": "function",
+      "params": {
+        "email": {
+          "type": "cds.String"
+        },
+        "password": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.register": {
+      "kind": "function",
+      "params": {
+        "json": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Language": {
+      "kind": "type",
+      "@title": "{i18n>Language}",
+      "@description": "{i18n>LanguageCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Currency": {
+      "kind": "type",
+      "@title": "{i18n>Currency}",
+      "@description": "{i18n>CurrencyCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Country": {
+      "kind": "type",
+      "@title": "{i18n>Country}",
+      "@description": "{i18n>CountryCode.Description}",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>LanguageCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Languages.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Countries.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@title": "{i18n>CurrencySymbol}",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Currencies.texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.CodeList": {
+      "kind": "aspect",
+      "@cds.autoexpose": true,
+      "@cds.persistence.skip": "if-unused",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.odata.valuelist": true,
+      "elements": {
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        }
+      }
+    },
+    "cuid": {
+      "kind": "aspect",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        }
+      }
+    },
+    "managed": {
+      "kind": "aspect",
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        }
+      }
+    },
+    "temporal": {
+      "kind": "aspect",
+      "elements": {
+        "validFrom": {
+          "@cds.valid.from": true,
+          "type": "cds.Timestamp"
+        },
+        "validTo": {
+          "@cds.valid.to": true,
+          "type": "cds.Timestamp"
+        }
+      }
+    },
+    "User": {
+      "kind": "type",
+      "@title": "{i18n>UserID}",
+      "@description": "{i18n>UserID.Description}",
+      "type": "cds.String",
+      "length": 255
+    },
+    "extensible": {
+      "kind": "aspect",
+      "elements": {
+        "extensions__": {
+          "@cds.api.ignore": true,
+          "type": "cds.String"
+        }
+      }
+    },
+    "sap.common.Languages.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>LanguageCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        }
+      }
+    },
+    "sap.common.Countries.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CountryCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Currencies.texts": {
+      "kind": "entity",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "@title": "{i18n>Name}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@title": "{i18n>Description}",
+          "localized": null,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@odata.containment.ignore": true,
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v2.15.10",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

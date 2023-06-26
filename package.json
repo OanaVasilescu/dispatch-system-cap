@@ -9,7 +9,8 @@
     "@sap/cds": "^5",
     "bcryptjs": "^2.4.3",
     "express": "^4",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "hdb": "^0.18.3"
   },
   "devDependencies": {
     "sqlite3": "^5.0.2"
@@ -45,11 +46,11 @@
   "cds": {
     "requires": {
       "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "database": "sqlite.db"
-        }
+        "kind": "hana-cloud"
       }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
     }
   }
 }
