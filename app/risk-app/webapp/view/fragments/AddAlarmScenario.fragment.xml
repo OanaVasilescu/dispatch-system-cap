@@ -1,0 +1,63 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="addAlarm" title="Add a new Alarm Scenario" class="bold_text">
+        <f:SimpleForm id="form" editable="true">
+            <f:content>
+                <Text text="Nume"/>
+                <Input id="fName" value="{editModel>/firstName}"/>
+
+                <Text text="Author"/>
+                <Input id="fAuthor" value="{editModel>/firstName}"/>
+
+                <Text text="Description"/>
+                <Input id="fDescription" value="{editModel>/firstName}"/>
+
+                <Text text="Severity"/>
+                <Input id="fSeverity" value="{editModel>/firstName}"/>
+
+                <Text text="GasMin"/>
+                <Input id="fGasMin" value="{editModel>/firstName}"/>
+
+                <Text text="GasMax"/>
+                <Input id="fGasMax" value="{editModel>/firstName}"/>
+
+                <Text text="LightMin"/>
+                <Input id="fLightMin" value="{editModel>/firstName}"/>
+
+                <Text text="LightMax"/>
+                <Input id="fLightMax" value="{editModel>/firstName}"/>
+
+                <Text text="ProximityMin"/>
+                <Input id="fProximityMin" value="{editModel>/firstName}"/>
+
+                <Text text="ProximityMax"/>
+                <Input id="fProximityMax" value="{editModel>/firstName}"/>
+
+                <Text text="PulseMin"/>
+                <Input id="fPulseMin" value="{editModel>/firstName}"/>
+
+                <Text text="PulseMax"/>
+                <Input id="fPulseMax" value="{editModel>/firstName}"/>
+
+                <Text text="HumidityMin"/>
+                <Input id="fHumidityMin" value="{editModel>/firstName}"/>
+
+                <Text text="HumidityMax"/>
+                <Input id="fHumidityMax" value="{editModel>/firstName}"/>
+
+                <Text text="TemperatureMin"/>
+                <Input id="fTemperatureMin" value="{editModel>/firstName}"/>
+
+                <Text text="TemperatureMax"/>
+                <Input id="fTemperatureMax" value="{editModel>/firstName}"/>
+
+                <OverflowToolbar>
+                    <Button text="Save" press="handleYesAddScenario" />
+                    <Button text="Cancel" press="handleCancelAddScenario"/>
+                </OverflowToolbar>
+            </f:content>
+        </f:SimpleForm>
+    </Dialog>
+</core:FragmentDefinition>
