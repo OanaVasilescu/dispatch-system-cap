@@ -1,0 +1,13 @@
+@server = http://localhost:4004
+
+### ------------------------------------------------------------------------
+POST  {{server}}/app/getData
+Content-Type: application/json
+
+{"data": "25;0;5;80;1;29;37" , "userId": "f85e2cfb-5b47-4e53-876e-dfbb85d0c7d4"}
+
+
+### ------------------------------------------------------------------------
+GET {{server}}/app/sayHello()
+Content-Type: application/json
+

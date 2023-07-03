@@ -741,10 +741,10 @@
         "gas": {
           "type": "cds.Integer"
         },
-        "light": {
+        "motionDetected": {
           "type": "cds.Integer"
         },
-        "proximity": {
+        "light": {
           "type": "cds.Integer"
         },
         "pulse": {
@@ -1494,10 +1494,10 @@
         "gas": {
           "type": "cds.Integer"
         },
-        "light": {
+        "motionDetected": {
           "type": "cds.Integer"
         },
-        "proximity": {
+        "light": {
           "type": "cds.Integer"
         },
         "pulse": {
@@ -1658,6 +1658,28 @@
         "items": {
           "type": "cds.String"
         }
+      }
+    },
+    "Service.getData": {
+      "kind": "action",
+      "params": {
+        "data": {
+          "type": "cds.String"
+        },
+        "userId": {
+          "type": "cds.String"
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "Service.sayHello": {
+      "kind": "function",
+      "returns": {
+        "type": "cds.String"
       }
     },
     "Language": {

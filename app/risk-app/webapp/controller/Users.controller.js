@@ -211,7 +211,7 @@ sap.ui.define([
                     break;
             }
 
-            await this.post("/app/User", user).then(async (data) => {
+            await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/User", user).then(async (data) => {
                 await this.getUsers();
                 this.clearPacientDialog();
             }).catch((err) => {

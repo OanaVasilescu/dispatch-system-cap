@@ -140,7 +140,7 @@ sap.ui.define([
 
                 // oModel.getData().push(oNewAppointment);
                 // oModel.updateBindings();
-                await this.post("/app/Programare", oNewAppointment).then(async (data) => {
+                await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare", oNewAppointment).then(async (data) => {
                     this.getAppointments()
                     this.messageHandler("Appointment with title \n'" + sAppointmentTitle + "'\n has been created");
                 }).catch((err) => {
@@ -167,7 +167,7 @@ sap.ui.define([
             oAppointment.setEndDate(oEndDate);
 
             this.prepareAppointment(oAppointment);
-            await this.put("/app/Programare/" + oAppointment.ID, oAppointment).then(async (data) => {
+            await this.put("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare/" + oAppointment.ID, oAppointment).then(async (data) => {
                 this.messageHandler("Appointment with title \n'" + sAppointmentTitle + "'\n has been resized");
                 this.getAppointments();
             }).catch((err) => {
@@ -188,7 +188,7 @@ sap.ui.define([
                     endDate: oEndDate
                 };
 
-            await this.post("/app/Programare", oNewAppointment).then(async (data) => {
+            await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare", oNewAppointment).then(async (data) => {
                 this.getAppointments()
                 this.messageHandler("Appointment with title \n'" + sAppointmentTitle + "'\n has been created");
             }).catch((err) => {
@@ -449,7 +449,7 @@ sap.ui.define([
 
             oDetailsPopover.close();
 
-            await this.delete("/app/Programare/" + oAppointment.ID).then(async (data) => {
+            await this.delete("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare/" + oAppointment.ID).then(async (data) => {
                 this.getAppointments()
             }).catch((err) => {
                 this.messageHandler("error");
@@ -502,7 +502,7 @@ sap.ui.define([
                     oModel.setProperty(sAppointmentPath + "/pacient_ID", pacient_ID);
 
                     this.prepareAppointment(oModel.getProperty(sAppointmentPath));
-                    await this.put("/app/Programare/" + oModel.getProperty(sAppointmentPath + "/ID"), oModel.getProperty(sAppointmentPath)).then(async (data) => { }).catch((err) => {
+                    await this.put("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare/" + oModel.getProperty(sAppointmentPath + "/ID"), oModel.getProperty(sAppointmentPath)).then(async (data) => { }).catch((err) => {
                         this.messageHandler("uploadRiskEventError");
                         return "error";
                     });
@@ -516,7 +516,7 @@ sap.ui.define([
                         pacient_ID: pacient_ID
                     };
 
-                    await this.post("/app/Programare", appt).then(async (data) => {
+                    await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Programare", appt).then(async (data) => {
                         oModel.getData().push({
                             title: sTitle,
                             text: sText,

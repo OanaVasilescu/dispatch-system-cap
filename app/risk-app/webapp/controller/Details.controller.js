@@ -251,7 +251,7 @@ sap.ui.define([
 
             let data = this.preparePacient(oData);
 
-            await this.put("/app/Pacient" + '/' + data.ID, data).then(async (data) => {
+            await this.put("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Pacient" + '/' + data.ID, data).then(async (data) => {
                 this.getPacient(data.ID)
             }).catch((err) => {
                 this.messageHandler("Pacient error");
@@ -631,7 +631,7 @@ sap.ui.define([
             fisa.boli = boli;
             fisa.drugs = drugs;
 
-            await this.post("/app/Fisa", fisa).then(async (data) => {
+            await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Fisa", fisa).then(async (data) => {
                 // this.getFise();
                 this.getPacient(fisa.pacient_ID);
             }).catch((err) => {
@@ -774,7 +774,7 @@ sap.ui.define([
 
         getFise: async function () {
             let id = this.getView().getModel("pacientModel").getData().ID;
-            await this.get("/app/getFiseOfUser(user='" + id + "')").then(async (data) => {
+            await this.get("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/getFiseOfUser(user='" + id + "')").then(async (data) => {
                 this.getPacient(id)
             }).catch((err) => {
                 console.log(err);

@@ -1,6 +1,6 @@
 sap.ui.define([], function () {
     "use strict";
-    const origin = "/app";
+    const origin = "https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app";
     const slash = "/";
     const Programare = "/Programare?&$expand=pacient";
     const pacients = "/Pacient?&$expand=fise";

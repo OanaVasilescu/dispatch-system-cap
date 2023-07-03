@@ -2,12 +2,31 @@
 const cds = require('@sap/cds/lib')
 const { Fisa } = cds.entities('eespc.app')
 const { User } = cds.entities('eespc.app')
+const { MonitoredData } = cds.entities('eespc.app')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { v4: uuidv4 } = require('uuid');
 
+cds.on('bootstrap', async app => {
+    console.log("@@@@@@@@@@@@@@@@@@@ bootstrapping $$$$")
+    app.use((req, res, next) => {
+        console.log("@@@@@@@@@@@@@@@@@@@ bootstrapping $$$$")
+        const { origin } = req.headers
+
+        // standard request
+        res.set('access-control-allow-origin', '*')
+
+        next()
+    })
+})
+
+cds.on('served', () => {
+    const { db } = cds.services
+    db.on('before', (req) => console.log(req.event, req.path))
+})
 
 module.exports = cds.service.impl(srv => {
+
     srv.on([
         'CREATE', 'UPDATE'
     ], 'User', async (req, next) => {
@@ -17,6 +36,8 @@ module.exports = cds.service.impl(srv => {
     srv.on('getFiseOfUser', getFiseOfUser);
     srv.on('login', login);
     srv.on('register', register);
+    srv.on('getData', getData);
+    srv.on('sayHello', () => "Hello");
 })
 
 async function getFiseOfUser(req) {
@@ -30,12 +51,6 @@ async function getFiseOfUser(req) {
 
 async function login(req) {
     const tx = cds.transaction(req);
-
-    // try {
-    // req.data.password = CryptoJS.AES.decrypt(
-    //     req.data.password,
-    //     'ENCRYPTION_SECRET'
-    // ).toString(CryptoJS.enc.Utf8);
 
     const allUser = await tx.read(User).where({ email: req.data.email });
 
@@ -53,48 +68,30 @@ async function login(req) {
         }
     } else {
         console.log("no found user");
-        req.error(400);
+        req.error({ code: 400, message: "no found user" });
     }
 }
 
 async function register(req) {
     const tx = cds.transaction(req);
 
-    // try {
-    // req.body.password = CryptoJS.AES.decrypt(
-    //     req.body.password,
-    //     process.env.ENCRYPTION_SECRET
-    // ).toString(CryptoJS.enc.Utf8);
-
     let userData = JSON.parse(req.data.json);
-
-    // const userData = {
-    //     firstName: req.data.firstName,
-    //     lastName: req.data.lastName,
-    //     email: req.data.email,
-    //     password: req.data.password,
-    //     confirm: req.data.confirm_password,
-    //     city: req.data.city,
-    //     phoneNumber: req.data.phoneNumber,
-    // };
-
-    // if (validatePhone(userData.phoneNumber) === false) {
-    //     req.error(`Invalid phone number`);//.json({ error: "Invalid phone number" });
-    //     return;
-    // }
 
 
     if (validateEmail(userData.email) === false) {
-        req.error(`Invalid email`)//.json({ error: "Invalid email" });
+        // req.error(`Invalid email`)//.json({ error: "Invalid email" });
+        req.error({ code: 400, message: "Invalid email" });
         return;
     }
     if (validateUser(userData) === false) {
-        req.error(`Some fields are not filled in`)//.json({ error: "Some fields are not filled in" });
+        // req.error(`Some fields are not filled in`)//.json({ error: "Some fields are not filled in" });
+        req.error({ code: 400, message: "Some fields are not filled in" });
         return;
     }
     if (userData.confirm_password != userData.password) {
         console.log(userData.confirm_password, ">>>", userData.password)
-        req.error(`Password fields don't match`)//.json({ error: "Password fields don't match" });
+        // req.error(`Password fields don't match`)//.json({ error: "Password fields don't match" });
+        req.error({ code: 400, message: "Password fields don't match" });
         return;
     }
 
@@ -116,7 +113,8 @@ async function register(req) {
             return { email: req.data.email, _id: generatedId }
         }
     } else {
-        req.error(`An account with email ${userData.email} already exists`);
+        req.error({ code: 400, message: `An account with email ${userData.email} already exists` });
+        // req.error(`An account with email ${userData.email} already exists`);
     }
 }
 
@@ -139,5 +137,38 @@ function validateUser(user) {
         }
     }
     return true;
+}
+
+async function getData(req) {
+    const tx = cds.transaction(req);
+
+    //Prelucrare date care vin de la senzori
+    let arduinoData = req.data.data;
+
+    let splitValues = arduinoData.split(';');
+
+    const gasSensorValue = splitValues[0];
+    const motionDetected = splitValues[1];
+    const lightIntensity = splitValues[2];
+    const myBPM = splitValues[3];
+    const temperatureError = splitValues[4];
+    const humidity = temperatureError ? splitValues[5] : null;
+    const temperature = temperatureError ? splitValues[6] : null;
+
+    const DataObj = {
+        gas: parseInt(gasSensorValue),
+        motionDetected: parseInt(motionDetected),
+        light: parseInt(lightIntensity),
+        pulse: parseInt(myBPM),
+        humidity: parseInt(humidity),
+        temperature: parseInt(temperature),
+        pacient_ID: req.data.userId
+    }
+
+    console.log("data ", DataObj);
+
+
+    await tx.create(MonitoredData, DataObj);
+    return DataObj;
 }
 

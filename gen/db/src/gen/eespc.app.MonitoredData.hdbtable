@@ -2,8 +2,8 @@
 COLUMN TABLE eespc_app_MonitoredData (
   ID NVARCHAR(36) NOT NULL,
   gas INTEGER,
+  motionDetected INTEGER,
   light INTEGER,
-  proximity INTEGER,
   pulse INTEGER,
   humidity INTEGER,
   temperature INTEGER,

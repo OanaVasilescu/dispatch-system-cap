@@ -2,8 +2,8 @@
 VIEW Service_MonitoredData AS SELECT
   MonitoredData_0.ID,
   MonitoredData_0.gas,
+  MonitoredData_0.motionDetected,
   MonitoredData_0.light,
-  MonitoredData_0.proximity,
   MonitoredData_0.pulse,
   MonitoredData_0.humidity,
   MonitoredData_0.temperature,

@@ -265,7 +265,7 @@ sap.ui.define([
             pacient.nume = nume;
             pacient.cnp = cnp;
 
-            await this.post("/app/Pacient", pacient).then(async (data) => {
+            await this.post("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/Pacient", pacient).then(async (data) => {
                 this.getRouter().navTo("Details", {
                     id: data.ID,
                     edit: true

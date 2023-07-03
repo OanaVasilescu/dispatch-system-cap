@@ -132,7 +132,7 @@ sap.ui.define([
                 // data.password = this.encryptPassword(data.password);
 
                 // this.post(URLs.getRegister() + `(firstName='${firstName}',lastName='${lastName}',email='${email},'password='${password}',confirm='${confirm_password}',city='${city}',phoneNumber='${phoneNumber}')`)
-                this.get(URLs.getRegister() + `(json='${JSON.stringify(oData)}')`)
+                this.get("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/register" + `(json='${JSON.stringify(oData)}')`)
                     .then((response) => {
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
@@ -140,8 +140,11 @@ sap.ui.define([
                         oRouter.navTo("Login");
                     })
                     .catch((err) => {
+                        debugger;
                         console.log(err);
-                        sap.m.MessageBox.error(`${err.responseJSON.error.message}` + ".");
+                        if (err.responseJSON) {
+                            sap.m.MessageBox.error(`${err.responseJSON.error.message}` + ".");
+                        }
                     })
                 this.getView().getModel("newUser").setProperty("/firstNameState", "None");
                 this.getView().getModel("newUser").setProperty("/lastNameState", "None");

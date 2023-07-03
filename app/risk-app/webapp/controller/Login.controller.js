@@ -58,7 +58,8 @@ sap.ui.define([
                 const dataI = JSON.parse(JSON.stringify(data));
                 dataI.password = this.encryptPassword(data.password);
 
-                this.get(URLs.getLogin() + `(email='${email}',password='${dataI.password}')`)
+                const url = URLs.getLogin() + `(email='${email}',password='${dataI.password}')`
+                this.get(url)
                     .then((response) => {
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
@@ -68,10 +69,9 @@ sap.ui.define([
 
                         switch (response.value[0].user.userRole) {
                             case 'Doctor':
-                                this.getRouter().navTo("IngrijitorOverview");
+                                this.getRouter().navTo("RouteOverview");
                                 break;
                             case 'Supervisor':
-                                debugger;
                                 this.getRouter().navTo("SupervisorOverview");
                                 break;
                             case 'Pacient':
