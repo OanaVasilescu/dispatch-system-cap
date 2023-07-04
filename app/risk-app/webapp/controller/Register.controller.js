@@ -127,13 +127,19 @@ sap.ui.define([
 
             let oRouter = this.getOwnerComponent().getRouter();
 
-            if (Validations.validateName(firstName) && Validations.validateName(lastName) && Validations.validateEmail(email) && Validations.validatePassword(password) && confirm_password) {
+            if (Validations.validateEmail(email) && Validations.validatePassword(password) && confirm_password) {
                 const data = JSON.parse(JSON.stringify(oData));
-                // data.password = this.encryptPassword(data.password);
+                const registerData = {
+                    'firstName': data.firstName,
+                    'lastName': data.lastName,
+                    'email': data.email,
+                    'password': data.password,
+                    'confirm_password': data.confirm_password
+                }
 
-                // this.post(URLs.getRegister() + `(firstName='${firstName}',lastName='${lastName}',email='${email},'password='${password}',confirm='${confirm_password}',city='${city}',phoneNumber='${phoneNumber}')`)
-                this.get("https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/register" + `(json='${JSON.stringify(oData)}')`)
+                this.post(URLs.getRegister(), registerData)
                     .then((response) => {
+                        debugger
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
                         MessageToast.show(this.getI18nMessage("WELCOME"));
