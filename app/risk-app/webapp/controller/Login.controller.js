@@ -59,9 +59,13 @@ sap.ui.define([
                 dataI.password = this.encryptPassword(data.password);
                 debugger
 
-                const url = URLs.getLogin() + `(email='${email}',password='${dataI.password}')`
-                this.get(url)
+                const loginData = {
+                    'email': email,
+                    'password': dataI.password
+                }
+                this.post(URLs.getLogin(), loginData)
                     .then((response) => {
+                        debugger
                         let newUser = new JSONModel();
                         this.getView().setModel(newUser, "newUser");
                         MessageToast.show(this.getI18nMessage("LOGIN_SUCCESSFUL"));
