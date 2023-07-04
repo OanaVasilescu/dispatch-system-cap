@@ -1,88 +1,119 @@
-<mvc:View controllerName="riskapp.controller.AlarmScenarios"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns:f="sap.f"
-    xmlns="sap.m"
-    xmlns:u="sap.ui.unified"
-    xmlns:t="sap.ui.table">
+<mvc:View
+    controllerName="riskapp.controller.AlarmScenarios"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns="sap.m">
 
-    <t:Table id="tableAlarmScenarios" selectionMode="None" visibleRowCount="15" enableCellFilter="{ui>/cellFilterOn}" filter="filterPrice" ariaLabelledBy="title">
-        <t:extension>
-            <OverflowToolbar style="Clear">
+    <Page showHeader="false" class="home_color2">
+
+        <Table
+            id="studentsList"
+            class="sapUiResponsiveMargin"
+            width="auto">
+
+        <headerToolbar>
+         <OverflowToolbar style="Clear">
                 <Title id="titleAlarmScenarios" text="Pacients"/>
                 <ToolbarSpacer/>
                 <Button icon="sap-icon://clear-filter" tooltip="Clear all filters" press="clearAllFilters"/>
                 <ToolbarSeparator/>
                 <Button icon="sap-icon://add" tooltip="Add scenario" press="openScenarioDialog" ariaHasPopup="Dialog"/>
             </OverflowToolbar>
-        </t:extension>
-        <t:columns>
-            <t:Column filterProperty="nume" sortProperty="nume" defaultFilterOperator="StartsWith">
-                <Label text="Name" />
-                <t:template>
-                    <Text text="{name}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="author" sortProperty="author">
-                <Label text="Author" />
-                <t:template>
-                    <Text text="{author}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="desc">
-                <Label text="Description" />
-                <t:template>
-                    <Text text="{desc}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="severity">
-                <Label text="Severity" />
-                <t:template>
-                    <Text text="{severity}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column sortProperty="gas">
-                <Label text="Gas" />
-                <t:template>
-                    <Text text="{gas}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="light">
-                <Label text="Light" />
-                <t:template>
-                    <Text text="{light}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column >
-                <Label text="Proximity" />
-                <t:template>
-                    <Text text="{proximity}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column>
-                <Label text="Pulse" />
-                <t:template>
-                    <Text text="{pulse}" wrapping="false" />
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="humidity">
-                <Label text="Humidity" />
-                <t:template>
-                    <HBox items="{humidity}">
-                        <items>
-                            <Text text="{alergen}; " wrapping="false" />
-                        </items>
-                    </HBox>
-                </t:template>
-            </t:Column>
-            <t:Column filterProperty="temperature">
-                <Label text="Temperature" />
-                <t:template>
-                    <Text text="{temperature}" wrapping="false" />
-                </t:template>
-            </t:Column>
-        </t:columns>
-        <t:footer>
-            <OverflowToolbar id="infobar"></OverflowToolbar>
-        </t:footer>
-    </t:Table>
+        </headerToolbar>
+
+        <columns>
+            <Column>
+                <ObjectIdentifier title="Name"/> 
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Author"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Description"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Severity"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Gas"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Light"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Proximity"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Pulse"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Humidity"/>
+            </Column>
+
+            <Column>
+                <ObjectIdentifier title="Temperature"/>
+            </Column>
+
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="Popovici Ana"/>
+                    <Text text="Arduino" /> 
+                    <Text text="Heart Attack" /> 
+                    <Text text="10" /> 
+                    <Text text="2" /> 
+                    <Text text="11" /> 
+                    <Text text="6" />
+                    <Text text="79" /> 
+                    <Text text="0.8" /> 
+                    <Text text="39" />
+                </cells>
+            </ColumnListItem>
+
+             <ColumnListItem>
+                <cells>
+                    <Text text="Negureanu Cosmin"/>
+                    <Text text="Arduino" /> 
+                    <Text text="Hyperventilation" /> 
+                    <Text text="6" /> 
+                    <Text text="3" /> 
+                    <Text text="22" /> 
+                    <Text text="1" />
+                    <Text text="120" /> 
+                    <Text text="55" /> 
+                    <Text text="27" />
+                </cells>
+            </ColumnListItem>
+
+             <ColumnListItem>
+                <cells>
+                    <Text text="Vacariu Teodora"/>
+                    <Text text="Arduino" /> 
+                    <Text text="Cardiorespiratory arrest" /> 
+                    <Text text="10" /> 
+                    <Text text="2" /> 
+                    <Text text="11" /> 
+                    <Text text="6" />
+                    <Text text="60" /> 
+                    <Text text="0.8" /> 
+                    <Text text="25" />
+                </cells>
+            </ColumnListItem>
+        </items>
+
+        </Table>
+
+    </Page>
+    
 </mvc:View>

@@ -1,4 +1,5 @@
-<core:FragmentDefinition xmlns="sap.m"
+<core:FragmentDefinition
+    xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form">
@@ -6,52 +7,52 @@
         <f:SimpleForm id="form" editable="true">
             <f:content>
                 <Text text="Nume"/>
-                <Input id="fName" value="{editModel>/firstName}"/>
+                <Input id="fName" value="{alarmModel>/name}"/>
 
                 <Text text="Author"/>
-                <Input id="fAuthor" value="{editModel>/firstName}"/>
+                <Input id="fAuthor" value="{alarmModel>/author}"/>
 
                 <Text text="Description"/>
-                <Input id="fDescription" value="{editModel>/firstName}"/>
+                <Input id="fDescription" value="{alarmModel>/description}"/>
 
                 <Text text="Severity"/>
-                <Input id="fSeverity" value="{editModel>/firstName}"/>
+                <Input id="fSeverity" value="{alarmModel>/severity}"/>
 
                 <Text text="GasMin"/>
-                <Input id="fGasMin" value="{editModel>/firstName}"/>
+                <Input id="fGasMin" value="{alarmModel>/gasMin}"/>
 
                 <Text text="GasMax"/>
-                <Input id="fGasMax" value="{editModel>/firstName}"/>
+                <Input id="fGasMax" value="{alarmModel>/gasMax}"/>
 
                 <Text text="LightMin"/>
-                <Input id="fLightMin" value="{editModel>/firstName}"/>
+                <Input id="fLightMin" value="{alarmModel>/lightMin}"/>
 
                 <Text text="LightMax"/>
-                <Input id="fLightMax" value="{editModel>/firstName}"/>
+                <Input id="fLightMax" value="{alarmModel>/lightMax}"/>
 
                 <Text text="ProximityMin"/>
-                <Input id="fProximityMin" value="{editModel>/firstName}"/>
+                <Input id="fProximityMin" value="{alarmModel>/proximityMin}"/>
 
                 <Text text="ProximityMax"/>
-                <Input id="fProximityMax" value="{editModel>/firstName}"/>
+                <Input id="fProximityMax" value="{alarmModel>/proximityMax}"/>
 
                 <Text text="PulseMin"/>
-                <Input id="fPulseMin" value="{editModel>/firstName}"/>
+                <Input id="fPulseMin" value="{alarmModel>/pulseMin}"/>
 
                 <Text text="PulseMax"/>
-                <Input id="fPulseMax" value="{editModel>/firstName}"/>
+                <Input id="fPulseMax" value="{alarmModel>/pulseMax}"/>
 
                 <Text text="HumidityMin"/>
-                <Input id="fHumidityMin" value="{editModel>/firstName}"/>
+                <Input id="fHumidityMin" value="{alarmModel>/humidityMin}"/>
 
                 <Text text="HumidityMax"/>
-                <Input id="fHumidityMax" value="{editModel>/firstName}"/>
+                <Input id="fHumidityMax" value="{alarmModel>/humidityMax}"/>
 
                 <Text text="TemperatureMin"/>
-                <Input id="fTemperatureMin" value="{editModel>/firstName}"/>
+                <Input id="fTemperatureMin" value="{alarmModel>/tempMin}"/>
 
                 <Text text="TemperatureMax"/>
-                <Input id="fTemperatureMax" value="{editModel>/firstName}"/>
+                <Input id="fTemperatureMax" value="{alarmModel>/tempMax}"/>
 
                 <OverflowToolbar>
                     <Button text="Save" press="handleYesAddScenario" />
