@@ -137,7 +137,7 @@ sap.ui.define([
                     'confirm_password': data.confirm_password
                 }
 
-                this.post(URLs.getRegister(), registerData)
+                this.post(URLs.getRegister(), {json: JSON.stringify(registerData)})
                     .then((response) => {
                         debugger
                         let newUser = new JSONModel();
