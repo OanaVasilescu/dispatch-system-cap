@@ -1648,7 +1648,7 @@
       }
     },
     "Service.register": {
-      "kind": "function",
+      "kind": "action",
       "params": {
         "json": {
           "type": "cds.String"

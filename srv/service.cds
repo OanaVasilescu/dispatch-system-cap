@@ -20,10 +20,8 @@ service Service @(path : '/app') {
     entity MonitoredData            as projection on my.MonitoredData;
     entity User                     as projection on my.User;
     function getFiseOfUser(user : String)             returns array of String;
-    function login(email : String, password : String) returns array of String;
-    function register(json : String)                  returns array of String;
+    action   login(email : String, password : String) returns array of String;
+    action   register(json : String)                  returns array of String;
     action   getData(data : String, userId : String)  returns array of String;
     function sayHello()                               returns String;
 }
-
-
