@@ -37,8 +37,66 @@ module.exports = cds.service.impl(srv => {
     srv.on('login', login);
     srv.on('register', register);
     srv.on('getData', getData);
-    srv.on('sayHello', () => "Hello");
 })
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+async function getData(req) {
+    const tx = cds.transaction(req);
+
+    //Prelucrare date care vin de la senzori
+    let userData = JSON.parse(req.data.data);
+    let testData = '25;3;5;80;29;37\n';
+    let splitValues = testData.split(';');
+    const gasSensorValue = splitValues[0];
+    const motionDetected = splitValues[1];
+    const lightIntensity = splitValues[2];
+    const myBPM = splitValues[3];
+    const temperatureError = splitValues[4];
+    const humidity = splitValues[5];
+    const temperature = splitValues[6];
+
+    let DataObj = {};
+
+    if (temperatureError == 0) {
+        DataObj = {
+            'gasSensorValue': gasSensorValue,
+            'motionDetected': motionDetected,
+            'lightIntensity': lightIntensity,
+            'myBPM': myBPM,
+            'humidity': humidity,
+            'temperature': temperature,
+            'pacient': {ID: "f85e2cfb-5b47-4e53-876e-dfbb85d0c7d4"}
+        };
+    }
+    else {
+        DataObj = {
+            'gasSensorValue': gasSensorValue,
+            'motionDetected': motionDetected,
+            'lightIntensity': lightIntensity,
+            'myBPM': myBPM,
+            'pacient': {ID: "f85e2cfb-5b47-4e53-876e-dfbb85d0c7d4"}
+        };
+    }
+
+    let responseSensors = await tx.create('MonitoredData', DataObj);
+    console.log(responseSensors);
+
+    //Date hardcodate in caz ca nu merge
+    let testDataObj = {
+        'gas': randomNumber(10, 50),
+        'light': randomNumber(1, 12),
+        'proximity': randomNumber(1, 5),
+        'pulse': randomNumber(0, 200),
+        'humidity': randomNumber(10, 90),
+        'temperature': randomNumber(35, 41),
+        'pacient': {ID: "f85e2cfb-5b47-4e53-876e-dfbb85d0c7d4"}
+    }
+    let response = await tx.create('MonitoredData', testDataObj);
+    console.log(response);
+}
 
 async function getFiseOfUser(req) {
     const tx = cds.transaction(req);
@@ -118,15 +176,16 @@ async function register(req) {
     }
 }
 
-
 function validatePhone(phone) {
     const regex = /^\+?\d{10}$/;
     return regex.test(phone);
 }
+
 function validateEmail(email) {
     const regex = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
     return regex.test(email);
 }
+
 function validateUser(user) {
     const keys = Object.keys(user);
     for (let i = 0; i < keys.length; i++) {

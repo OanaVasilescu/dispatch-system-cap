@@ -57,6 +57,7 @@ sap.ui.define([
 
                 const dataI = JSON.parse(JSON.stringify(data));
                 dataI.password = this.encryptPassword(data.password);
+                debugger
 
                 const url = URLs.getLogin() + `(email='${email}',password='${dataI.password}')`
                 this.get(url)

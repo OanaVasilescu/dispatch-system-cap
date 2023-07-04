@@ -22,6 +22,7 @@ entity Doctor : cuid {
     speciality : String;
 }
 
+
 entity Pacient : cuid {
     nume          : String;
     prenume       : String;
